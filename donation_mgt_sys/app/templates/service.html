@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}| Services{% endblock title %}
+    {% block header %}
+  	<div class="header container">
+      <div class="visible-xs visible-sm col-xs-12 col-sm-12 text-center sm-logo">
+        <a rel="home" href="{% url 'home' %}">
+          <img src="{% static 'img/logo.png' %}" width="200" alt="logo">
+        </a>
+      </div>
+  	</div>
+		<div class="navbar" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="{% url 'home' %}">Home</a></li>
+					<li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+					<li><a href="{% url 'event' %}">Events</a></li>
+          <li class= "hidden-xs hidden-sm">
+            <a rel="home"
+               href="{% url 'home' %}"><img class="logo" src="{% static 'img/logo.png' %}" width="200" alt="logo"></a>
+          </li>
+					<li><a href="{% url 'team' %}">Team</a></li>
+					<li class="selected"><a href="{% url 'services' %}">Sevices</a></li>
+					<li><a href="{% url 'gallery' %}">Gallery</a></li>
+					<li><a href="{% url 'login' %}">Sign In</a></li>
+				</ul>
+			</div>
+		</div>
+    {% endblock header %}
+{% block content %}
+        <div class="divider col-sm-12 col-xs-12 col-md-12">
+            <div class="header-text"> Our <span>Services</span></div>
+        </div>
+
+        <section id="blog-isotope" class="subpage bg-white">
+        <div class="overlay-light">
+            <div id="content" class="container">
+                <!-- posts -->
+                <div class="posts">
+                    {% for ser in service %}
+                    <div class="post item col-md-4 col-xs-12 col-sm-4">
+                           <div class="panel">
+                                  <div class="panel-header">
+                                     <img src="{{ ser.image.url }}" class="img-responsive"  alt="image"/>
+                                  </div>
+                                  <div class="panel-body">
+                                       <h3 class="post-title">{{ ser.title }}</h3>
+                                        <p>{{ ser.description }}</p>
+                                  </div>
+                            </div>
+                    </div>
+                    {% endfor %}
+            </div>
+         </div><!-- /end overlay -->
+        </div>
+      </section><!--=== / END blog ===-->
+
+    <script>
+     $('.testimonials-slider').bxSlider({
+      slideWidth: 800,
+      minSlides: 1,
+      maxSlides: 1,
+      slideMargin: 32,
+      auto: true,
+      autoControls: true
+      });
+    </script>
+    <script type="text/javascript">
+    </script>
+{% endblock content %}

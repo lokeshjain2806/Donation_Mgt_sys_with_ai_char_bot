@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}| AI Chat Bot{% endblock title %}
+
+    {% block header %}
+  	<div class="header container">
+      <div class="visible-xs visible-sm col-xs-12 col-sm-12 text-center sm-logo">
+        <a rel="home" href="{% url 'login_view' %}">
+          <img src="{% static 'img/logo.png' %}" width="200" alt="logo">
+        </a>
+      </div>
+  	</div>
+		<div class="navbar" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="{% url 'login_view' %}">Home</a></li>
+                    {% if request.user.type == 'Is Volunteers' %}
+					<li><a href="{% url 'post_donate' %}">Post Donation</a></li>
+                    {% else %}
+					<li><a href="{% url 'check_donation' %}">Check Donation</a></li>
+                    {% endif %}
+          <li class= "hidden-xs hidden-sm">
+            <a rel="home"
+               href="{% url 'login_view' %}"><img class="logo" src="{% static 'img/logo.png' %}" width="200" alt="logo"></a>
+          </li>
+					<li><a href="{% url 'profile' pk=user.pk %}">Profile</a></li>
+					<li class="selected"><a href="{% url 'chat_bot' %}">Chat Bot</a></li>
+					<li><a href="{% url 'logout' %}">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+    {% endblock header %}
+{% block content %}
+        <div class="divider col-sm-12 col-xs-12 col-md-12">
+            <div class="header-text"><span>Ai</span> Chat Bot</div>
+        </div>
+        <div class="col-md-12 container">
+            <div class="donate-content">
+              <div class="donate-body">
+                <div class="accent-rule-short"></div>
+                <!-- monthly / one-time -->
+                      <div class="container"> <!-- Add container class -->
+                        <form class="form-horizontal text-center" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <fieldset>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        {{ form|crispy }}
+                                        <br>
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                        {% if bot_message %}
+                            <div class="bot-message">Ans : {{ bot_message }}</div>
+                        {% endif %}
+
+
+
+                    </div>
+                <br>
+                <br><br>
+            </div>
+          </div>
+        </div>
+
+
+    <script>
+     $('.testimonials-slider').bxSlider({
+      slideWidth: 800,
+      minSlides: 1,
+      maxSlides: 1,
+      slideMargin: 32,
+      auto: true,
+      autoControls: true
+      });
+    </script>
+        <script type="text/javascript">
+        </script>
+<style>
+        .bot-message {
+            font-style: italic;
+            color: black;
+        }
+    </style>
+{% endblock content %}

@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}| Sign Up{% endblock title %}
+
+    {% block header %}
+  	<div class="header container">
+      <div class="visible-xs visible-sm col-xs-12 col-sm-12 text-center sm-logo">
+        <a rel="home" href="{% url 'home' %}">
+          <img src="{% static 'img/logo.png' %}" width="200" alt="logo">
+        </a>
+      </div>
+  	</div>
+		<div class="navbar" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="{% url 'home' %}">Home</a></li>
+					<li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+					<li><a href="{% url 'event' %}">Events</a></li>
+          <li class= "hidden-xs hidden-sm">
+            <a rel="home"
+               href="{% url 'home' %}"><img class="logo" src="{% static 'img/logo.png' %}" width="200" alt="logo"></a>
+          </li>
+					<li><a href="{% url 'team' %}">Team</a></li>
+					<li><a href="{% url 'services' %}">Sevices</a></li>
+					<li><a href="{% url 'gallery' %}">Gallery</a></li>
+					<li class="selected"><a href="{% url 'login' %}">Sign In</a></li>
+				</ul>
+			</div>
+		</div>
+    {% endblock header %}
+{% block content %}
+        <div class="divider col-sm-12 col-xs-12 col-md-12">
+            <div class="header-text"><span>Login</span> Here</div>
+        </div>
+        <div class="col-md-12 container">
+            <div class="donate-content">
+              <div class="donate-body">
+                <div class="accent-rule-short"></div>
+                <!-- monthly / one-time -->
+                      <div class="container"> <!-- Add container class -->
+                        <form class="form-horizontal text-center" method="post">
+                            {% csrf_token %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                      <div class="alert alert-{{ message.tags }}">
+                                        {{ message }}
+                                      </div>
+                                {% endfor %}
+                            {% endif %}
+                            <fieldset>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        {{ form|crispy }}
+                                        <br>
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                  <a href="{% url 'otp_login' %}" class="text-primary"><b>Login Via OTP</b></a><br>
+                  <a href="{% url 'registration' %}" class="text-primary"><b>Sign Up?</b></a><br>
+                  <a href="{% url 'password-reset' %}" class="text-primary"><b>Forget Password?</b></a><br>
+                <br>
+                <br><br>
+            </div>
+          </div>
+        </div>
+        <div class="fun-fact col-md-12">
+        <div class="stat">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="milestone-counter">
+                    <i class="fa fa-users fa-3x"></i>
+                    <span class="stat-count highlight">422</span>
+                    <div class="milestone-details">Happy Volunteers</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="milestone-counter">
+                    <i class="fa fa-map-marker fa-3x"></i>
+                    <span class="stat-count highlight">26</span>
+                    <div class="milestone-details">Countries Served</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="milestone-counter">
+                    <i class="fa fa-trophy fa-3x"></i>
+                    <span class="stat-count highlight">14</span>
+                    <div class="milestone-details">Awards Win</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="milestone-counter">
+                    <i class="fa fa-money fa-3x"></i>
+                    <span class="stat-count highlight">232</span>
+                    <div class="milestone-details">Million USD Donated</div>
+                </div>
+            </div>
+    </div><!-- stat -->
+  </div>
+
+
+
+    <script>
+     $('.testimonials-slider').bxSlider({
+      slideWidth: 800,
+      minSlides: 1,
+      maxSlides: 1,
+      slideMargin: 32,
+      auto: true,
+      autoControls: true
+      });
+    </script>
+        <script type="text/javascript">
+        </script>
+{% endblock content %}
